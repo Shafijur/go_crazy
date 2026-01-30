@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoCrazy - Find Unforgettable Experiences</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-orange: #FF6B35;
+            --primary-blue: #1A535C;
+            --secondary-teal: #4ECDC4;
+            --light-cream: #F7FFF7;
+            --dark-gray: #292F36;
+            --accent-yellow: #FFE66D;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark-gray);
+            background-color: var(--light-cream);
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, .navbar-brand {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+        }
+        
+        /* Enhanced Logo Styles */
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 2.2rem;
+            color: var(--primary-orange);
+            text-decoration: none;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .logo span {
+            color: var(--primary-blue);
+        }
+        
+        .logo-icon {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary-orange) 0%, var(--accent-yellow) 100%);
+            border-radius: 50%;
+            margin-right: 10px;
+            position: relative;
+            vertical-align: middle;
+        }
+        
+        .logo-icon::after {
+            content: "↑";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(45deg);
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        a.btn.btn-outline-primary.me-2 {
+            padding-top: 10px;
+            border: 2px solid #ff6e00;
+            color: #ff6e00;
+        }
+
+        a.btn.btn-outline-primary.me-2:hover {
+            color: var(--primary-blue);
+            background-color: #fff0e6;
+        }
+        
+        button.btn.btn-outline-primary {
+            border: 2px solid #ffd2b1;
+            color: #ff6e00;
+        }
+        button.btn.btn-outline-primary:hover {
+            color: var(--primary-blue);
+            background-color: #fff0e6;
+        }
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(rgba(26, 83, 92, 0.85), rgba(26, 83, 92, 0.9)), 
+                        url('https://images.unsplash.com/photo-1501555088652-021faa106b9b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 120px 0;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+        }
+        
+        /* Search Box */
+        .search-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            margin-top: 30px;
+        }
+        
+        .search-btn {
+            background: var(--primary-orange);
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 12px 30px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .search-btn:hover {
+            background: var(--primary-blue);
+            transform: translateY(-3px);
+        }
+        
+        /* Experience Cards */
+        .experience-card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            height: 100%;
+            box-shadow: var(--shadow);
+        }
+        
+        .experience-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-img-top {
+            height: 220px;
+            object-fit: cover;
+        }
+        
+        .experience-category {
+            display: inline-block;
+            background: var(--secondary-teal);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        
+        .price-tag {
+            font-weight: 700;
+            color: var(--primary-orange);
+            font-size: 1.3rem;
+        }
+        
+        /* Category Cards */
+        .category-card {
+            border-radius: 15px;
+            overflow: hidden;
+            height: 280px;
+            position: relative;
+            margin-bottom: 30px;
+            cursor: pointer;
+        }
+        
+        .category-card img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .category-card:hover img {
+            transform: scale(1.05);
+        }
+        
+        .category-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 25px;
+        }
+        
+        /* How It Works */
+        .step-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--primary-blue);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 0 auto 20px;
+        }
+        
+        /* Testimonials */
+        .testimonial-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            height: 100%;
+        }
+        
+        .user-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--secondary-teal);
+        }
+        p.lead.mb-4 {
+            color: lightsalmon;
+        }
+
+        h2.display-6.fw-bold.mb-3 {
+            color: coral;
+        }
+        i.bi.bi-people-fill {
+    background: linear-gradient(90deg, var(--primary-orange), var(--accent-yellow));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
+        /* Footer */
+        .footer {
+            background: var(--dark-gray);
+            color: white;
+            padding: 70px 0 30px;
+        }
+        
+        .footer h5 {
+            color: var(--secondary-teal);
+            margin-bottom: 25px;
+        }
+        
+        .footer a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer a:hover {
+            color: var(--primary-orange);
+        }
+        @media (max-width: 1200px) {
+        .search-btn {
+            padding: 12px 12px;
+        }
+    }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .category-card {
+                height: 220px;
+            }
+        }
+        
+        /* Animation Classes */
+        .fade-in {
+            animation: fadeIn 1s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .btn-crazy {
+            background: linear-gradient(90deg, var(--primary-orange), var(--accent-yellow));
+            border: none;
+            color: var(--dark-gray);
+            font-weight: 600;
+            padding: 12px 30px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-crazy:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 107, 53, 0.3);
+        }
+        
+        /* Wishlist Heart */
+        .wishlist-heart {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .wishlist-heart:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+        
+        .wishlist-heart.active {
+            color: #ff4757;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-orange);
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <div class="logo-icon"></div>
+                <span class="logo">Go<span>Crazy</span></span>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active fw-medium" href="#">Discover</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-medium" href="#categories">Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-medium" href="#how-it-works">How It Works</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-medium" href="#host">Host Experience</a>
+                    </li>
+                </ul>
+                
+                <div class="d-flex">
+                    <a href="#" class="btn btn-outline-primary me-2">Login</a>
+                    <a href="#" class="btn btn-crazy">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8 mx-auto text-center fade-in">
+                    <h1 class="hero-title">Life's too short for ordinary weekends</h1>
+                    <p class="hero-subtitle">Discover unforgettable experiences curated by passionate locals. Adventure, creativity, and memories await.</p>
+                    
+                    <div class="search-container fade-in" style="animation-delay: 0.3s;">
+                        <div class="row g-3">
+                            <div class="col-md-3">
+                                <input type="text" class="form-control form-control-lg" placeholder="Where?">
+                            </div>
+                            <div class="col-md-3">
+                                <input type="date" class="form-control form-control-lg">
+                            </div>
+                            <div class="col-md-3">
+                                <select class="form-select form-select-lg">
+                                    <option selected>Experience Type</option>
+                                    <option>Adventure</option>
+                                    <option>Food & Drink</option>
+                                    <option>Creative</option>
+                                    <option>Wellness</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <button class="btn search-btn w-100">Find Experiences</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Categories -->
+    <section class="py-5" id="categories">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="display-5 fw-bold mb-3">Find Your Perfect Experience</h2>
+                    <p class="text-muted">Browse through our handpicked categories of unique adventures</p>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="category-card">
+                        <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Outdoor Adventures">
+                        <div class="category-overlay">
+                            <h4>Outdoor Adventures</h4>
+                            <p>Hiking, Kayaking, Camping</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3">
+                    <div class="category-card">
+                        <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Food & Drink">
+                        <div class="category-overlay">
+                            <h4>Food & Drink</h4>
+                            <p>Cooking, Wine Tasting, Brewery Tours</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3">
+                    <div class="category-card">
+                        <img src="https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Creative Workshops">
+                        <div class="category-overlay">
+                            <h4>Creative Workshops</h4>
+                            <p>Pottery, Painting, Photography</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3">
+                    <div class="category-card">
+                        <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Local Secrets">
+                        <div class="category-overlay">
+                            <h4>Local Secrets</h4>
+                            <p>Hidden Gems, Historical Tours</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Personalization Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h2 class="fw-bold mb-4">Not sure where to start?</h2>
+                    <p class="lead mb-4">Let us match you with the perfect experience based on your mood, companions, and budget.</p>
+                    
+                    <div class="mb-3">
+                        <label class="form-label fw-medium">I want to feel:</label>
+                        <div class="d-flex flex-wrap gap-2">
+                            <button class="btn btn-outline-primary">Excited</button>
+                            <button class="btn btn-outline-primary">Inspired</button>
+                            <button class="btn btn-outline-primary">Relaxed</button>
+                            <button class="btn btn-outline-primary">Challenged</button>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label fw-medium">With:</label>
+                        <div class="d-flex flex-wrap gap-2">
+                            <button class="btn btn-outline-primary">Friends</button>
+                            <button class="btn btn-outline-primary">Partner</button>
+                            <button class="btn btn-outline-primary">Family</button>
+                            <button class="btn btn-outline-primary">Solo</button>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="form-label fw-medium">My budget:</label>
+                        <div class="d-flex flex-wrap gap-2">
+                            <button class="btn btn-outline-primary">$</button>
+                            <button class="btn btn-outline-primary">$$</button>
+                            <button class="btn btn-outline-primary">$$$</button>
+                            <button class="btn btn-outline-primary">$$$$</button>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-crazy">Get Personalized Picks</button>
+                </div>
+                
+                <div class="col-lg-6">
+                    <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" 
+                         class="img-fluid rounded-3 shadow" alt="Group enjoying experience">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="py-5" id="how-it-works">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="display-5 fw-bold mb-3">How GoCrazy Works</h2>
+                    <p class="text-muted">Three simple steps to your next unforgettable experience</p>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-4 text-center">
+                    <div class="step-icon">1</div>
+                    <h4 class="fw-bold mb-3">Browse Unique Experiences</h4>
+                    <p class="text-muted">Explore hundreds of handpicked activities from passionate local hosts.</p>
+                </div>
+                
+                <div class="col-md-4 text-center">
+                    <div class="step-icon">2</div>
+                    <h4 class="fw-bold mb-3">Book Securely</h4>
+                    <p class="text-muted">Reserve your spot with our secure booking system and flexible cancellation.</p>
+                </div>
+                
+                <div class="col-md-4 text-center">
+                    <div class="step-icon">3</div>
+                    <h4 class="fw-bold mb-3">Live The Moment & Share</h4>
+                    <p class="text-muted">Create unforgettable memories and share your experience with our community.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trending Experiences -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="display-5 fw-bold mb-3">Trending Experiences</h2>
+                    <p class="text-muted">Most booked experiences this week</p>
+                </div>
+            </div>
+            
+            <div class="row g-4" id="experience-container">
+                <!-- Experiences will be loaded here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="display-5 fw-bold mb-3">What Our Adventurers Say</h2>
+                    <p class="text-muted">Real stories from real experiences</p>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="https://randomuser.me/api/portraits/women/32.jpg" class="user-avatar me-3" alt="User">
+                            <div>
+                                <h5 class="mb-0">Sarah M.</h5>
+                                <small>Photography Workshop</small>
+                            </div>
+                        </div>
+                        <p class="mb-0">"The night photography workshop was incredible! I learned so much and met amazing people. Definitely booking another experience soon!"</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="https://randomuser.me/api/portraits/men/54.jpg" class="user-avatar me-3" alt="User">
+                            <div>
+                                <h5 class="mb-0">James L.</h5>
+                                <small>Mountain Biking Adventure</small>
+                            </div>
+                        </div>
+                        <p class="mb-0">"As a beginner, I was nervous but our guide was fantastic! The views were breathtaking and I pushed my limits in the best way possible."</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="https://randomuser.me/api/portraits/women/67.jpg" class="user-avatar me-3" alt="User">
+                            <div>
+                                <h5 class="mb-0">Priya K.</h5>
+                                <small>Thai Cooking Class</small>
+                            </div>
+                        </div>
+                        <p class="mb-0">"The cooking class was so much fun! Not only did we learn authentic recipes, but we also got to enjoy the meal together. Highly recommended!"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Host CTA -->
+    <section class="py-5 bg-primary-blue text-white" id="host">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8 col-md-8 col-sm-8 col-8">
+                    <h2 class="display-6 fw-bold mb-3">Share Your Passion with the World</h2>
+                    <p class="lead mb-4">Become a GoCrazy host and turn your skills and knowledge into memorable experiences for others.</p>
+                    <a href="#" class="btn btn-crazy btn-lg px-4">Start Hosting</a>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-4 text-end">
+                    <i class="bi bi-people-fill" style="font-size: 8rem; opacity: 0.7;"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-4">
+                    <a class="navbar-brand d-flex align-items-center mb-4" href="#">
+                        <div class="logo-icon" style="width: 30px; height: 30px;"></div>
+                        <span class="logo" style="font-size: 1.8rem;">Go<span>Crazy</span></span>
+                    </a>
+                    <p class="mb-4">Life is measured in experiences, not years. Find your next unforgettable adventure with GoCrazy.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#"><i class="bi bi-facebook fs-5"></i></a>
+                        <a href="#"><i class="bi bi-instagram fs-5"></i></a>
+                        <a href="#"><i class="bi bi-twitter fs-5"></i></a>
+                        <a href="#"><i class="bi bi-tiktok fs-5"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5>Discover</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#">All Experiences</a></li>
+                        <li class="mb-2"><a href="#">Gift Cards</a></li>
+                        <li class="mb-2"><a href="#">Experience Passport</a></li>
+                        <li class="mb-2"><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5>Host</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#">Become a Host</a></li>
+                        <li class="mb-2"><a href="#">Host Resources</a></li>
+                        <li class="mb-2"><a href="#">Safety Standards</a></li>
+                        <li class="mb-2"><a href="#">Community</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-4">
+                    <h5>Stay Updated</h5>
+                    <p class="mb-3">Subscribe to get weekly inspiration and new experience alerts.</p>
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="Your email address">
+                        <button class="btn btn-crazy">Subscribe</button>
+                    </div>
+                    <div class="d-flex gap-3 mt-4">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" height="40" alt="App Store">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" height="40" alt="Google Play">
+                    </div>
+                </div>
+            </div>
+            
+            <hr class="my-5 opacity-25">
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2023 GoCrazy. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="#" class="me-3">Privacy Policy</a>
+                    <a href="#" class="me-3">Terms of Service</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Sample experience data
+        const experiences = [
+            {
+                 id: 1,
+        title: "Sunset Yoga & Meditation",
+        category: "Wellness",
+        price: "$45",
+        // New image URL
+        image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+        rating: 4.9,
+        location: "Miami, FL"
+            },
+            {
+                id: 2,
+                title: "Urban Graffiti Workshop",
+                category: "Creative",
+                price: "$65",
+                image: "https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?ixlib=rb-4.0.3&auto=format&fit=crop&w-1350&q=80",
+                rating: 4.8,
+                location: "Brooklyn, NY"
+            },
+            {
+                id: 3,
+                title: "Secret Food Tour",
+                category: "Food & Drink",
+                price: "$89",
+                image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+                rating: 5.0,
+                location: "Portland, OR"
+            },
+            {
+                id: 4,
+                title: "Night Kayaking with Bioluminescence",
+                category: "Adventure",
+                price: "$75",
+                image: "https://images.unsplash.com/photo-1506929562872-bb421503ef21?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+                rating: 4.7,
+                location: "San Diego, CA"
+            }
+        ];
+        
+        // Function to render experience cards
+        function renderExperiences() {
+            const container = document.getElementById('experience-container');
+            container.innerHTML = '';
+            
+            experiences.forEach(exp => {
+                const col = document.createElement('div');
+                col.className = 'col-md-6 col-lg-3';
+                
+                col.innerHTML = `
+                    <div class="card experience-card">
+                        <div class="position-relative">
+                            <img src="${exp.image}" class="card-img-top" alt="${exp.title}">
+                            <div class="wishlist-heart" onclick="toggleWishlist(${exp.id})">
+                                <i class="bi bi-heart"></i>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <span class="experience-category">${exp.category}</span>
+                            <h5 class="card-title fw-bold">${exp.title}</h5>
+                            <p class="card-text text-muted">
+                                <i class="bi bi-geo-alt me-1"></i> ${exp.location}
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="price-tag">${exp.price}</span>
+                                    <small class="text-muted">/person</small>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-star-fill text-warning me-1"></i>
+                                    <span>${exp.rating}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(col);
+            });
+        }
+        
+        // Toggle wishlist heart
+        function toggleWishlist(id) {
+            const heart = event.currentTarget;
+            heart.classList.toggle('active');
+            
+            const icon = heart.querySelector('i');
+            if (heart.classList.contains('active')) {
+                icon.classList.remove('bi-heart');
+                icon.classList.add('bi-heart-fill');
+                
+                // Show a toast notification
+                showToast('Added to your wishlist!');
+            } else {
+                icon.classList.remove('bi-heart-fill');
+                icon.classList.add('bi-heart');
+            }
+        }
+        
+        // Show toast notification
+        function showToast(message) {
+            // Create toast element
+            const toast = document.createElement('div');
+            toast.className = 'position-fixed bottom-0 end-0 p-3';
+            toast.style.zIndex = '11';
+            
+            toast.innerHTML = `
+                <div class="toast show" role="alert">
+                    <div class="toast-header bg-primary text-white">
+                        <i class="bi bi-check-circle me-2"></i>
+                        <strong class="me-auto">GoCrazy</strong>
+                        <button type="button" class="btn-close btn-close-white" onclick="this.parentElement.parentElement.remove()"></button>
+                    </div>
+                    <div class="toast-body">
+                        ${message}
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(toast);
+            
+            // Remove toast after 3 seconds
+            setTimeout(() => {
+                if (toast.parentNode) {
+                    toast.remove();
+                }
+            }, 3000);
+        }
+        
+        // Personalization buttons functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            renderExperiences();
+            
+            // Add active state to personalization buttons
+            const personalizationBtns = document.querySelectorAll('.btn-outline-primary');
+            personalizationBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    if (this.classList.contains('active')) {
+                        this.style.backgroundColor = 'var(--primary-blue)';
+                        this.style.color = 'white';
+                        this.style.borderColor = 'var(--primary-blue)';
+                    } else {
+                        this.style.backgroundColor = '';
+                        this.style.color = '';
+                        this.style.borderColor = '';
+                    }
+                });
+            });
+            
+            // Smooth scroll for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Animate elements on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in');
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe elements to animate
+            document.querySelectorAll('.category-card, .step-icon, .testimonial-card').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
